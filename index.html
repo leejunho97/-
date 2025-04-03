@@ -12,33 +12,34 @@
             padding: 10px;
         }
         .container {
-            max-width: 90%;
+            max-width: 45%;
             margin: auto;
             background: white;
-            padding: 15px;
+            padding: 10px;
             border-radius: 15px;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
             overflow-x: auto;
         }
-        h1 {
-            font-size: 2.2em;
+        .title {
+            font-size: 2em;
             color: #1E90FF;
-            padding: 10px;
+            padding: 5px;
             border-radius: 10px;
-            display: inline-block;
+            display: block;
             font-weight: bold;
+            margin-bottom: -40px;
         }
         .date-box {
             text-align: right;
-            font-size: 1.3em;
-            margin-bottom: 10px;
+            font-size: 1.2em;
+            margin-bottom: 5px;
             font-family: 'Arial Rounded MT Bold', sans-serif;
             font-weight: bold;
         }
         .status-legend {
             text-align: right;
-            margin-bottom: 10px;
-            font-size: 1.1em;
+            margin-bottom: 5px;
+            font-size: 1em;
             font-weight: bold;
         }
         .status-box {
@@ -57,9 +58,9 @@
         }
         th, td {
             border: 2px solid #ddd;
-            padding: 6px;
+            padding: 13px;
             text-align: center;
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: bold;
             border-radius: 10px;
             cursor: pointer;
@@ -67,17 +68,17 @@
         th {
             background-color: #1E90FF;
             color: white;
-            font-size: 1.3em;
+            font-size: 1.2em;
         }
         tr td:first-child {
             font-weight: bold;
             cursor: default;
         }
         .notice {
-            font-size: 1.3em;
+            font-size: 1.4em;
             font-weight: bold;
             color: #333;
-            margin-top: 15px;
+            margin-top: 10px;
         }
     </style>
     <script>
@@ -108,8 +109,8 @@
 </head>
 <body onload="setTodayDate()">
     <div class="container">
-        <h1>코리아IT아카데미</h1>
-        <h1>빈 강의실 현황</h1>
+        <h1 class="title">코리아IT아카데미</h1>
+        <h1 class="title">빈 강의실 현황</h1>
         <div class="date-box">날짜: <span id="date-display"></span></div>
         <div class="status-legend">
             <span class="status-box legend-available"></span>사용 가능
