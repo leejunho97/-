@@ -73,6 +73,17 @@
             color: #333;
             font-weight: bold;
         }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 10px;
+            }
+            table {
+                font-size: 0.9em;
+            }
+        }
     </style>
     <script>
         function setTodayDate() {
@@ -81,18 +92,6 @@
             let month = String(today.getMonth() + 1).padStart(2, '0');
             let day = String(today.getDate()).padStart(2, '0');
             document.getElementById("date-display").innerText = `${year}-${month}-${day}`;
-        }
-
-        function toggleStatus(cell) {
-            if (cell.classList.contains("available")) {
-                cell.classList.remove("available");
-                cell.classList.add("occupied");
-                cell.innerHTML = '<span class="status-box"></span>사용 중';
-            } else {
-                cell.classList.remove("occupied");
-                cell.classList.add("available");
-                cell.innerHTML = '<span class="status-box"></span>사용 가능';
-            }
         }
     </script>
 </head>
@@ -111,11 +110,28 @@
             </tr>
             <script>
                 let times = ['09:00-10:00', '10:00-11:00', '11:00-12:00', '12:00-13:00', '13:00-14:00', '14:00-15:00', '15:00-16:00', '16:00-17:00', '17:00-18:00', '18:00-19:00', '19:00-20:00', '20:00-21:00', '21:00-22:00'];
+                let password = "admin123";  // 관리자 비밀번호 설정
+                function updateStatus(cell) {
+                    let inputPass = prompt("관리자 비밀번호를 입력하세요:");
+                    if (inputPass === password) {
+                        if (cell.classList.contains("available")) {
+                            cell.classList.remove("available");
+                            cell.classList.add("occupied");
+                            cell.innerHTML = '<span class="status-box"></span>사용 중';
+                        } else {
+                            cell.classList.remove("occupied");
+                            cell.classList.add("available");
+                            cell.innerHTML = '<span class="status-box"></span>사용 가능';
+                        }
+                    } else {
+                        alert("비밀번호가 틀렸습니다!");
+                    }
+                }
                 times.forEach(time => {
                     document.write('<tr>');
                     document.write(`<td>${time}</td>`);
                     for (let i = 0; i < 5; i++) {
-                        document.write('<td class="available" onclick="toggleStatus(this)"><span class="status-box"></span>사용 중</td>');
+                        document.write('<td class="available" onclick="updateStatus(this)"><span class="status-box"></span>사용 가능</td>');
                     }
                     document.write('</tr>');
                 });
