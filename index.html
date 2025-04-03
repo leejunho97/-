@@ -3,72 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>빈 강의실 안내</title>
+    <title>코리아IT아카데미 빈 강의실 현황</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial Rounded MT Bold', sans-serif;
             text-align: center;
-            background-color: #f4f4f4;
+            background-color: #f0f8ff;
             padding: 20px;
         }
-        .poster {
-            background: white;
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>빈 강의실 안내</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
-        .poster {
+        .container {
+            max-width: 900px;
+            margin: auto;
             background: white;
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            max-width: 500px;
-            margin: auto;
-        }
-        .poster img {
-            width: 100%;
-            border-radius: 10px;
-            max-height: 300px;
-            object-fit: cover;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
         }
         h1 {
-            color: #333;
-            font-size: 24px;
-        }
-        .info {
-            font-size: 18px;
-            color: #555;
-            margin: 15px 0;
-        }
-        .highlight {
-            font-size: 20px;
+            font-size: 2.2em;
+            color: #1E90FF;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
             font-weight: bold;
-            color: #e63946;
+        }
+        .date-box {
+            text-align: right;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            font-family: 'Arial Rounded MT Bold', sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+            font-size: 1.1em;
+            border-radius: 10px;
+            position: relative;
+        }
+        th {
+            background-color: #1E90FF;
+            color: white;
+            font-size: 1.2em;
+            border-radius: 10px;
+        }
+        .status-box {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+        .occupied .status-box {
+            background-color: red;
+        }
+        .available .status-box {
+            background-color: green;
+        }
+        .notice {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #333;
+            font-weight: bold;
         }
     </style>
+    <script>
+        function setTodayDate() {
+            let today = new Date();
+            let year = today.getFullYear();
+            let month = String(today.getMonth() + 1).padStart(2, '0');
+            let day = String(today.getDate()).padStart(2, '0');
+            document.getElementById("date-display").innerText = `${year}-${month}-${day}`;
+        }
+
+        function toggleStatus(cell) {
+            if (cell.classList.contains("available")) {
+                cell.classList.remove("available");
+                cell.classList.add("occupied");
+                cell.innerHTML = '<span class="status-box"></span>사용 중';
+            } else {
+                cell.classList.remove("occupied");
+                cell.classList.add("available");
+                cell.innerHTML = '<span class="status-box"></span>사용 가능';
+            }
+        }
+    </script>
 </head>
-<body>
-    <div class="poster">
-        <h1>📢 오늘의 빈 강의실 안내</h1>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Empty_classroom_in_Iran.jpg" alt="강의실 이미지">
-        <p class="info">🗓️ 날짜: <span class="highlight">2025년 4월 3일</span></p>
-        <p class="info">🏫 사용 가능한 강의실:</p>
-        <ul class="info">
-            <li>101호 (09:00 ~ 12:00)</li>
-            <li>203호 (14:00 ~ 17:00)</li>
-            <li>305호 (15:00 ~ 18:00)</li>
-        </ul>
-        <p class="info">📍 학원에서 자유롭게 사용하세요!</p>
+<body onload="setTodayDate()">
+    <div class="container">
+        <h1>코리아IT아카데미 빈 강의실 현황</h1>
+        <div class="date-box">날짜: <span id="date-display"></span></div>
+        <table>
+            <tr>
+                <th>시간 / 강의실</th>
+                <th>A 강의실</th>
+                <th>B 강의실</th>
+                <th>C 강의실</th>
+                <th>D 강의실</th>
+                <th>E 강의실</th>
+            </tr>
+            <script>
+                let times = ['09:00-10:00', '10:00-11:00', '11:00-12:00', '12:00-13:00', '13:00-14:00', '14:00-15:00', '15:00-16:00', '16:00-17:00', '17:00-18:00', '18:00-19:00', '19:00-20:00', '20:00-21:00', '21:00-22:00'];
+                times.forEach(time => {
+                    document.write('<tr>');
+                    document.write(`<td>${time}</td>`);
+                    for (let i = 0; i < 5; i++) {
+                        document.write('<td class="available" onclick="toggleStatus(this)"><span class="status-box"></span>사용 중</td>');
+                    }
+                    document.write('</tr>');
+                });
+            </script>
+        </table>
+        <p class="notice">※ 이 정보는 평일 수업 기준이며, 매일 업데이트됩니다.</p>
     </div>
 </body>
 </html>
-
